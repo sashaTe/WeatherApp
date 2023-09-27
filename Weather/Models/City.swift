@@ -10,7 +10,7 @@ import MapKit
 
 
 struct City: Identifiable, Equatable, Codable{
-    var id = UUID()
+    var id = UUID().uuidString
     var name:String?
     var administrativeArea:String?
     var country:String?

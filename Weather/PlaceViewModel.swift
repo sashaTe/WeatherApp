@@ -17,6 +17,7 @@ class PlaceViewModel: ObservableObject {
     @Published var cities: [City] = []
     @Published var weeklyForecast = [WeatherInfo]()
     @Published var weekly: Weekly?
+    @Published var selectedIndex: String = ""
     
     func search(text: String) { //region: MKCoordinateRegion) {
         let searchRequest = MKLocalSearch.Request()

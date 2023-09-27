@@ -15,6 +15,7 @@ struct CityCardView: View {
     @State private var searchable = ""
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var vm: ViewModel
+    @State var isActive = false
 //    @Binding var returnedPlace: Place
     var body: some View {
         NavigationView {
@@ -48,13 +49,22 @@ struct CityCardView: View {
                     VStack {
                         ScrollView {
                             ForEach(placeVm.cities) { city in
+                                
                                 CityCard(city: city.name ?? "")
                                     .padding(.horizontal)
-//                                    .frame(width: 200, height: 100)
+                                    .contentShape(Rectangle()) // Add this line
+                                    .onTapGesture {
+                                        placeVm.selectedIndex = city.id
+                                        print("INDEX: \(city.id)")
+                                        dismiss()
+                                    }
+                              
                             }
                         }
+//                        NavigationLink("", destination: MainView(), isActive: $isActive)
+
                     }
-                
+//                                    .frame(width: 200, height: 100)
             
 //                VStack {
 //                    ForEach(placeVm.places) {
@@ -131,6 +141,7 @@ struct CityCardView_Previews: PreviewProvider {
 
 struct CityCard: View {
     var city: String
+    @EnvironmentObject private var placeVM: PlaceViewModel
     @State private var goToMainView = false
     var body: some View {
         ZStack {
@@ -180,10 +191,7 @@ struct CityCard: View {
             .padding()
 //            NavigationLink("", destination: ContentView(cityName: city), isActive: $goToMainView)
         }
-        .onTapGesture {
-//            goToMainView = true
-            
-        }
+
   
         //        .navigationBarBackButtonHidden()
 //        .toolbar {

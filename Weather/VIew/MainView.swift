@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
     @EnvironmentObject private var placeVM: PlaceViewModel
     @State private var searchPage = false
+    
 
     var testArray = ["London", "Paris", "Amsterdam"]
     var body: some View {
@@ -18,9 +19,11 @@ struct MainView: View {
             Color.theme.yellow
                 .ignoresSafeArea()
             VStack {
-                TabView {
+                TabView(selection: $placeVM.selectedIndex) {
                     ForEach(placeVM.cities) { city in
                         ContentView(lat: city.coordinates?.latitude ?? 55.750446, lon: city.coordinates?.longitude ?? 37.617494, cityName: city.name ?? "")
+                            .tag(city.id)
+                            
                     }
                 }
             }
