@@ -25,7 +25,7 @@ class DeveloperPreview {
     
     private init() { }
     
-    let vm = ViewModel()
+    let vm = PlaceViewModel()
   
   
     
